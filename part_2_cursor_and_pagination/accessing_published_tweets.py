@@ -11,14 +11,17 @@ import twitter_credentials1
 class TwitterClient():
     def __init__(self, twitter_user=None):
         self.auth = TwitterAuthenticator().authenticate_twitter_app()#To authenticate username we are going to take as input
-        self.twitter_client = API(self.auth)
+        self.twitter_client = API(self.auth)#authentication on process 
 
-        self.twitter_user = twitter_user
+        self.twitter_user = twitter_user # for entering the username 
          
 
-    def get_user_timeline_tweets(self, num_tweets):
+    def get_user_timeline_tweets(self, num_tweets):#specifies the no of tweets we ask for 
         tweets = []
         for tweet in Cursor(self.twitter_client.user_timeline, id=self.twitter_user).items(num_tweets):
+        ''' the above command helps us to fetch the tweets of the timeline of a specific user , so incase if we leave the method
+            call empty or invalid then it returns back our own timeline i.e owner's timeline  '''
+        ''' the parameter from the cursor object items() that will instruct the user how many tweets they want  '''
             tweets.append(tweet)
         return tweets
 
